@@ -1,5 +1,6 @@
 package Cinema;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class UserInputMethods {
@@ -31,7 +32,7 @@ public class UserInputMethods {
 	public static boolean getEnterInput(Scanner scanner, String promptMessage) {
 		System.out.println(promptMessage + " Press ENTER: ");
 		String question = scanner.nextLine().toLowerCase().trim();
-		return question.equals("\n");
+		return question.isEmpty();
 	}
 
 	public static String getNotBlankString(Scanner scanner, String promptMessage) {
@@ -80,6 +81,21 @@ public class UserInputMethods {
 
 		} while (isValid == false);
 		return value - 1;
+	}
+	
+	public static String getStringChoice(Scanner scanner, String promptMessage, List<String> options) {
+		String value;
+		boolean isValid = true;
+		do {
+			value = UserInputMethods.getNotBlankString(scanner, promptMessage);
+			if (options.contains(value)) {
+				isValid = true;
+			} else {
+				isValid = false;
+				System.out.println("Invalid choice, please make another one.");
+			}
+		} while (isValid == false);
+		return value;
 	}
 
 	public static boolean getAnotherChoice(Scanner scanner, String objectName) {

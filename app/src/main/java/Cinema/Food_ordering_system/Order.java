@@ -1,6 +1,7 @@
 package Cinema.Food_ordering_system;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Order {
@@ -19,6 +20,10 @@ public class Order {
 	
 	public void deleteItem(OrderItem item) {
 		//TODO
+	}
+	
+	public List<OrderItem> getItems() {
+		return Collections.unmodifiableList(itemList); //vytváří jiný list, který nejde modifikovat (aby mi nezměnili můj list)
 	}
 	
 	public double getTotalPrice() {
