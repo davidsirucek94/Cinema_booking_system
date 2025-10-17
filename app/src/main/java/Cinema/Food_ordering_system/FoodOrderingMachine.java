@@ -43,7 +43,7 @@ public class FoodOrderingMachine {
 	}
 
 	public void printPaymentScreen(List<Meal> meals, List<Menu> menus, Scanner scanner) {
-		System.out.println("---------Receipt---------");
+		System.out.println("---------Payment---------");
 		System.out.println("List of purchased items:");
 		for (int i = 0; i < order.getItems().size(); i++) {
 			OrderItem item = order.getItems().get(i);
@@ -51,10 +51,12 @@ public class FoodOrderingMachine {
 		}
 		System.out.println();
 		System.out.printf("Your total price is %.2f Kč\n", order.getTotalPrice());
+		new PaymentSystem().initializePayment(scanner);
+		System.out.println();
 		System.out.println("Thank you for your purchase.");
 		
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(3000);
 			clearScreen();
 			printWelcomeScreen(meals, menus, scanner);
 		} catch (InterruptedException e) {
