@@ -84,7 +84,7 @@ public class UserInputMethods {
 	}
 	
 	public static String getStringChoice(Scanner scanner, String promptMessage, List<String> options) {
-		String value;
+		String value = "";
 		boolean isValid = true;
 		do {
 			value = UserInputMethods.getNotBlankString(scanner, promptMessage);

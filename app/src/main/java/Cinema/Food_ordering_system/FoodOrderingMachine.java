@@ -51,7 +51,7 @@ public class FoodOrderingMachine {
 		}
 		System.out.println();
 		System.out.printf("Your total price is %.2f Kč\n", order.getTotalPrice());
-		new PaymentSystem().initializePayment(scanner);
+		new PaymentSystem().initializePayment(scanner, order.getTotalPrice());
 		System.out.println();
 		System.out.println("Thank you for your purchase.");
 		
