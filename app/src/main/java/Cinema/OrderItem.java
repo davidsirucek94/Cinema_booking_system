@@ -1,4 +1,4 @@
-package Cinema.Food_ordering_system;
+package Cinema;
 
 public class OrderItem { //parent
 

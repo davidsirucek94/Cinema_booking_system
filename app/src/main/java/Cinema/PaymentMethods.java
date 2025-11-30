@@ -1,4 +1,4 @@
-package Cinema.Food_ordering_system;
+package Cinema;
 
 import java.util.HashSet;
 import java.util.Set;

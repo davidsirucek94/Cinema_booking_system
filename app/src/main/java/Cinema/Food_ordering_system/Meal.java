@@ -1,5 +1,7 @@
 package Cinema.Food_ordering_system;
 
+import Cinema.OrderItem;
+
 public class Meal extends OrderItem {
 
 	public Meal(int id, String name, double price) {

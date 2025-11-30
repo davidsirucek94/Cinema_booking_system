@@ -3,6 +3,8 @@ package Cinema.Food_ordering_system;
 import java.util.ArrayList;
 import java.util.List;
 
+import Cinema.OrderItem;
+
 public class Menu extends OrderItem {
 	
 	public Menu(int id, String name, double price) {

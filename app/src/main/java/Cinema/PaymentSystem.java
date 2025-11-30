@@ -1,12 +1,10 @@
-package Cinema.Food_ordering_system;
+package Cinema;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-
-import Cinema.UserInputMethods;
 
 public class PaymentSystem {
 
@@ -64,12 +62,6 @@ public class PaymentSystem {
 			for (Map.Entry<Integer, Integer> entry : notesToReturn.entrySet()) {
 				returnMoney = returnMoney + String.format("%d x %d Czk, ", entry.getValue(), entry.getKey());
 			}
-			/*for (int i = 0; i < knownMoneyValues.size(); i++) {
-				if (notesToReturn.containsKey(knownMoneyValues.get(i))) {
-					returnMoney = returnMoney + String.format("%d x %d Czk, ",
-							notesToReturn.get(knownMoneyValues.get(i)), knownMoneyValues.get(i));
-				}
-			}*/
 			System.out.println("Notes to return: " + returnMoney);
 			break;
 
