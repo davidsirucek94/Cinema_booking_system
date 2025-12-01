@@ -38,6 +38,10 @@ public class Projection {
 		return price;
 	}
 	
+	public Movie getMovie() {
+		return movie;
+	}
+	
 	public Set<String> getBookedSeats() {
 		return bookedSeats;
 	}

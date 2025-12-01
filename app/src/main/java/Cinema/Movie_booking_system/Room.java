@@ -23,4 +23,8 @@ public class Room {
 	public int getColumns() {
 		return numberOfColumns;
 	}
+	
+	public int getRoomNumber() {
+		return roomNumber;
+	}
 }
