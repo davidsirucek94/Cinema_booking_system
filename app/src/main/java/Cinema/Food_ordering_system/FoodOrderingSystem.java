@@ -12,7 +12,6 @@ import Cinema.UserInputMethods;
 
 public class FoodOrderingSystem extends OrderingSystem {
 
-	private Order order;
 	private List<Meal> meals;
 	private List<Menu> menus;
 	
@@ -20,6 +19,11 @@ public class FoodOrderingSystem extends OrderingSystem {
 		super(scanner);
 		this.meals = meals;
 		this.menus = menus;
+	}
+	
+	@Override
+	public String getGreeting() {
+		return "Welcome to the Food Ordering System! Let`s order some food!";
 	}
 	
 	@Override
@@ -74,28 +78,6 @@ public class FoodOrderingSystem extends OrderingSystem {
 					System.out.println("Your chosen item was added to your order.");
 				}
 			}
-		}
-	}
-
-	public void printPaymentScreen() {
-		System.out.println("---------Payment---------");
-		System.out.println("List of purchased items:");
-		for (int i = 0; i < order.getItems().size(); i++) {
-			OrderItem item = order.getItems().get(i);
-			System.out.printf("%d) %s ... %.2f Kč\n", i + 1, item.getName(), item.getPrice());
-		}
-		System.out.println();
-		System.out.printf("Your total price is %.2f Kč\n", order.getTotalPrice());
-		new PaymentSystem().initializePayment(scanner, order.getTotalPrice());
-		System.out.println();
-		System.out.println("Thank you for your purchase.");
-		
-		try {
-			Thread.sleep(3000);
-			clearScreen();
-			printWelcomeScreen();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
 		}
 	}
 

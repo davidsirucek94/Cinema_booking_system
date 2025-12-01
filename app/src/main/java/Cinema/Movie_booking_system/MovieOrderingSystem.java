@@ -9,6 +9,8 @@ import java.util.Scanner;
 import java.util.Set;
 
 import Cinema.Constants;
+import Cinema.Order;
+import Cinema.OrderItem;
 import Cinema.OrderingSystem;
 import Cinema.PaymentSystem;
 import Cinema.UserInputMethods;
@@ -20,7 +22,7 @@ public class MovieOrderingSystem extends OrderingSystem {
 	private Movie chosenMovie;
 	private Set<String> chosenSeats;
 	private Projection chosenProjection;
-	
+
 	public MovieOrderingSystem(Scanner scanner, List<Movie> movies, Map<Movie, List<Projection>> projectionsPerMovie) {
 		super(scanner);
 		this.movies = movies;
@@ -28,7 +30,14 @@ public class MovieOrderingSystem extends OrderingSystem {
 	}
 
 	@Override
+	public String getGreeting() {
+		return "Welcome to the Movie Ordering System! Let`s book a movie!";
+	}
+	
+	@Override
 	public void printOrderingScreen() {
+
+		order = new Order();
 
 		List<String> options = new ArrayList<>();
 		int itemNumber = 1;
@@ -73,16 +82,16 @@ public class MovieOrderingSystem extends OrderingSystem {
 
 		String stringChoice = UserInputMethods.getStringChoice(scanner, "Type your choice:", options);
 		int choiceIndex = Integer.parseInt(stringChoice) - 1;
-		Projection chosenProjection = projections.get(choiceIndex);
+		chosenProjection = projections.get(choiceIndex);
 		Room chosenRoom = chosenProjection.getRoom();
-		Set<String> chosenSeats = new HashSet<>();
+		chosenSeats = new HashSet<>();
 
 		do {
 			List<String> seatOptions = new ArrayList<>();
 
 			for (int i = 0; i < chosenRoom.getRows(); i++) {
 				for (int j = 0; j < chosenRoom.getColumns(); j++) {
-					String seat = String.format("%dx%d", i + 1, j + 1);
+					String seat = String.format("%d%s%d", i + 1, Constants.SEAT_SEPARATOR, j + 1);
 					if (!chosenSeats.contains(seat)) {
 						seatOptions.add(seat);
 						System.out.printf(seat + " ");
@@ -101,33 +110,39 @@ public class MovieOrderingSystem extends OrderingSystem {
 			}
 		} while (true);
 
+		String description = String.format("Name: %s, Number of seats: %d", chosenMovie.getName(), chosenSeats.size());
+		double price = chosenSeats.size() * chosenProjection.getPrice();
+		order.addItem(new OrderItem(1, description, price));
+
 		printPaymentScreen();
+		printTickets();
 	}
 
-	public void printPaymentScreen() { //TODO sjednotit Payment Screens pomocí třídy OrderingSystem
-		
-		System.out.println("---------Payment---------");
-		int numberOfChosenSeats = chosenSeats.size();
-		System.out.printf("You have selected %d seats.\n", numberOfChosenSeats);
-
-		String seatsPrint = "Seats selected: ";
-
-		boolean isFirst = true;
-		for (String chosenSeat : chosenSeats) {
-			if (isFirst) {
-				seatsPrint = seatsPrint + chosenSeat;
-				isFirst = false;
-			} else {
-				seatsPrint = seatsPrint + ", " + chosenSeat;
-			}
+	public void printTickets() {
+		List<String> listOfChosenSeats = chosenSeats.stream().toList();
+		for (int i = 0; i < listOfChosenSeats.size(); i++) {
+			String[] seatCoords = listOfChosenSeats.get(i).split(Constants.SEAT_SEPARATOR);
+			System.out.printf("""
+					=====================================
+					             🎬 TICKET
+					-------------------------------------
+					  Film:       %s
+					  Date:       %s
+					  Time:       %s
+					  Room:       %s
+					  Seat:       Row: %s • Seat: %s
+					-------------------------------------
+					  Price:      %.2f Kč
+					=====================================
+					    Thank you for your visit and 
+					      we wish you a nice stay!
+					=====================================
+					""", chosenProjection.getMovie().getName(),
+					chosenProjection.getDateTime().format(Constants.DATE_FORMATTER),
+					chosenProjection.getDateTime().format(Constants.TIME_FORMATTER),
+					chosenProjection.getRoom().getRoomNumber(), seatCoords[0], seatCoords[1], chosenProjection.getPrice());
+			System.out.println();
 		}
-
-		System.out.println(seatsPrint);
-
-		double totalPrice = chosenProjection.getPrice() * numberOfChosenSeats;
-		System.out.printf("Total price of your booking is %.2f,- Kč.\n", totalPrice);
-
-		new PaymentSystem().initializePayment(scanner, totalPrice);
 	}
 
 	public static void main(String[] args) {
