@@ -64,6 +64,8 @@ public class FoodOrderingSystem extends OrderingSystem {
 			String stringChoice = UserInputMethods.getStringChoice(scanner, "Type your choice:", options);
 			if (stringChoice.equals("P")) {
 				printPaymentScreen();
+				order.setCreationDateTime();
+				storeOrder();
 				break;
 			} else if (stringChoice.equals("C")) {
 				printCancelingScreen();
