@@ -46,6 +46,18 @@ public class UserInputMethods {
 		} while (value.isBlank());
 		return value;
 	}
+	
+	public static String getCorrectEmailAdress(Scanner scanner, String promptMessage) {
+		String value;
+		do {
+			System.out.println(promptMessage);
+			value = scanner.nextLine();
+			if (value.isBlank() || !value.contains("@")) {
+				System.out.println("You entered an empty or wrong email. Please enter it again.");	
+			}		
+		} while (value.isBlank() || !value.contains("@"));
+		return value;
+	}
 
 	public static double getValidDouble(Scanner scanner, String promptMessage) {
 		double value;
