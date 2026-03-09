@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -112,7 +113,7 @@ public class MovieOrderingSystem extends OrderingSystem {
 
 		String description = String.format("Name: %s, Number of seats: %d", chosenMovie.getName(), chosenSeats.size());
 		double price = chosenSeats.size() * chosenProjection.getPrice();
-		order.addItem(new OrderItem(1, description, price));
+		order.addItem(new OrderItem(1, description, price, Optional.empty()));
 
 		printPaymentScreen();
 		printTickets();

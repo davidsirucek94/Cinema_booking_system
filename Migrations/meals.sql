@@ -3,13 +3,15 @@
 create table meals(
     id serial primary key,
     name text not null,
-    price numeric(15,2) not null
+    price numeric(15,2) not null,
+    discount_percents int default null
 );
 
 create table menus(
     id serial primary key,
     name text not null unique,
-    price numeric(15,2) not null
+    price numeric(15,2) not null,
+    discount_percents int default null
 );
 
 create table menu_meals(

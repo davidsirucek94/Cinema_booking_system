@@ -82,26 +82,4 @@ public class FoodOrderingSystem extends OrderingSystem {
 			}
 		}
 	}
-
-	public static void main(String[] args) {
-
-		Scanner scanner = new Scanner(System.in);
-		List<Meal> meals = new ArrayList<>();
-		List<Menu> menus = new ArrayList<>();
-
-		Meal meal1 = new Meal(1, "nachos", 200);
-		Meal meal2 = new Meal(2, "hotdog", 300);
-		meals.add(meal1);
-		meals.add(meal2);
-
-		Menu menu1 = new Menu(1, "menuA", 500);
-		Menu menu2 = new Menu(2, "menuB", 700);
-
-		menus.add(menu1);
-		menus.add(menu2);
-
-		FoodOrderingSystem machine = new FoodOrderingSystem(scanner, meals, menus);
-		machine.printWelcomeScreen();
-
-	}
 }

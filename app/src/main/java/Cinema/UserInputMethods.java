@@ -1,5 +1,6 @@
 package Cinema;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
@@ -75,6 +76,23 @@ public class UserInputMethods {
 			}
 		} while (isValid == false);
 		return value;
+	}
+	
+	public static LocalDate getDate(Scanner scanner) {
+		boolean isValid = true;
+		LocalDate date = null;
+		do {
+			System.out.println("Enter date in format DD.MM.YYYY");
+			String sDate = scanner.nextLine();
+			try { //nebezpečná operace
+				date = LocalDate.parse(sDate, Constants.DATE_FORMATTER);
+				isValid = true;
+			} catch (Exception e) {
+				isValid = false;
+			}
+			
+		} while (!isValid);
+		return date;
 	}
 
 	public static int getIntegerByChoiceMinusOne(Scanner scanner, String promptMessage, int maxNumber) {
